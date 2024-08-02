@@ -1,0 +1,56 @@
+ @font-face {
+  font-family: 'Gilroy';
+  src: local('Gilroy-Bold'), url('./assets/fonts/gilroy/Gilroy-Bold.ttf') format('truetype');
+  font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: local('Gilroy-Medium'), url(./assets/fonts/gilroy/Gilroy-Medium.ttf) format('truetype');
+  font-weight: 500;
+	font-style: normal;
+}
+@font-face {
+  font-family: 'Gilroy';
+  src: local('Gilroy-Light'), url(./assets/fonts/gilroy/Gilroy-Light.ttf) format('truetype');
+  font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  src: local('Gilroy'), url(./assets/fonts/gilroy/Gilroy-Regular.ttf) format('truetype');
+	src: local('Gilroy Regular'), local('Gilroy'),
+		url('./assets/fonts//gilroy/Gilroy-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+} 
+
+.bold-number{
+  font-size:16px;
+  font-weight: 700;
+  line-height: 22.4px;
+  text-align: left;
+  color: #E8E7F0;
+}
+.card-header{
+  color:  #A5A5A6;
+}
+.card-content{
+  color:  #C9C8CC;
+}
+.h3{
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height:  27px ;
+}
+::-webkit-scrollbar {
+  border-radius: 4px;
+  background: var(--background-elevation-2, #2D2D30);
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: var(--icon-low-emp, #727080);
+}
