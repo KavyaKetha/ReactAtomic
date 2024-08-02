@@ -1,0 +1,81 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+      - development
+      - routes
+      - testcases
+  pull_request:
+    branches:
+      - main
+      - development
+      - routes
+      - testcases
+    types: [opened, synchronize, reopened]
+
+jobs:
+  sonarcloud:
+    name: SonarCloud
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps
+      - name: Test and coverage
+        run: npm run test
+      - name: Debug - List Coverage Directory
+        run: ls -l coverage
+      - name: Upload coverage report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/lcov.info
+      - name: SonarCloud Scan
+        id: sonarcloud_scan
+        uses: SonarSource/sonarcloud-github-action@master
+        with:
+          projectBaseDir: ./backend
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  branchAnalysis:
+    name: Branch Analysis on PR merge
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps
+      - name: Test and coverage
+        run: npm run test
+      - name: Upload coverage report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage/lcov.info
+      - name: SonarCloud Scan
+        id: sonarcloud_scan
+        uses: SonarSource/sonarcloud-github-action@master
+        with:
+          projectBaseDir: ./backend
+          args: >
+            -Dsonar.branch.name=main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

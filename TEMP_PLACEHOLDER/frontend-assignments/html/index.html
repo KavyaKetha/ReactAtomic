@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Website</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#contact">Contact Me</a></li>
+            <li><a href="#gallery">My Gallery</a></li>
+        </ul>
+    </nav>
+    <main class="cards">
+        <section id="home" class="card">
+            <h1 class="card-title">Welcome to My Portfolio</h1>
+            <p class="card-text">Hello! I'm Kavya, a passionate MERN stack developer with a knack for creating dynamic
+                and responsive web
+                applications. With a strong foundation in MySQL, Express.js, React and Node.js, I build robust,
+                scalable,
+                and efficient applications that meet the needs of users and businesses alike.</p>
+        </section>
+
+        <section id="about" class="card">
+            <h1 class="card-title">About Me</h1>
+            <div>
+                <p class="card-text">My journey as a developer began with a curiosity for technology and a drive to
+                    solve
+                    complex problems.
+                    Over
+                    the years, I have honed my skills in full-stack development, and I enjoy working on both front-end
+                    and
+                    back-end technologies. Whether it's building a user-friendly interface or optimizing server-side
+                    performance, I am dedicated to delivering high-quality solutions.</p>
+                <p class="card-text">Feel free to explore my portfolio to learn more about my projects and experience.
+                    If
+                    you have any
+                    questions
+                    or would like to collaborate on a project, don't hesitate to reach out through the contact section.
+                    Thank
+                    you for visiting!</p>
+            </div>
+        </section>
+
+        <section id="contact" class="card">
+            <h1 class="card-title">Contact Me</h1>
+            <div>
+                <form id="contactForm">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+            <p id="acknowledgement" style="display:none;">Thank you for your message!</p>
+        </section>
+
+        <section id="gallery" class="card">
+            <h1 class="card-title">My Gallery</h1>
+            <div class="grid-container">
+                <div class="grid-item"><img src="./images/photo1.jpg" alt="MERN"></div>
+                <div class="grid-item"><img src="./images/photo2.jpg" alt="MERN"></div>
+                <div class="grid-item"><img src="./images/photo3.jpg" alt="HTML"></div>
+            </div>
+        </section>
+    </main>
+
+
+    <script src="./scripts/script.js"></script>
+</body>
+
+</html>

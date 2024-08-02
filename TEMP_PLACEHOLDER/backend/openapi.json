@@ -1,0 +1,689 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Checkr APIs",
+    "description": "All the APIs related to the checkr application are available here with their responses.\nSome useful links:\n  - [The Checkr github repository](https://github.com/zemoso-int/kavyaketha_ldp)",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "candidates",
+      "description": "Everything about candidates",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    },
+    {
+      "name": "user",
+      "description": "Action on User",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "paths": {
+    "/candidates": {
+      "get": {
+        "tags": [
+          "candidates"
+        ],
+        "operationId": "listOfCandidates",
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "query",
+            "description": "Page number",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Size of the page",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": 10
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "search by candidate name",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "John"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter by status",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "CLEAR"
+            }
+          },
+          {
+            "name": "adjudication",
+            "in": "query",
+            "description": "Filter by adjudication",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "ENGAGED"
+            }
+          }
+        ],
+        "summary": "Returns a list of candidates.",
+        "description": "List of the candidates in the system.",
+        "responses": {
+          "200": {
+            "description": "A JSON array of candidates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "John"
+                      },
+                      "adjudication": {
+                        "type": "string",
+                        "example": "CLEAR"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "CLEAR"
+                      },
+                      "location": {
+                        "type": "string",
+                        "example": "Barroualie"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2018-03-20T09:12:28.000Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Data not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  },
+                  "example": []
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/candidates/{candidateId}": {
+      "get": {
+        "tags": [
+          "candidates"
+        ],
+        "summary": "Returns the details of a candidates.",
+        "description": "Details of the candidates in the system.",
+        "operationId": "findCandidateById",
+        "parameters": [
+          {
+            "name": "candidateId",
+            "in": "path",
+            "description": "ID of the candidate",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of candidates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "John"
+                    },
+                    "adjudication": {
+                      "type": "string",
+                      "example": "CLEAR"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "CLEAR"
+                    },
+                    "location": {
+                      "type": "string",
+                      "example": "Barroualie"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date",
+                      "example": "2018-03-20T09:12:28.000Z"
+                    },
+                    "createdDate": {
+                      "type": "string",
+                      "format": "date",
+                      "example": "2018-03-20T09:12:28.000Z"
+                    },
+                    "dob": {
+                      "type": "string",
+                      "format": "date",
+                      "example": "1990-09-01T09:12:28.000Z"
+                    },
+                    "phone": {
+                      "type": "number",
+                      "example": 5555555555
+                    },
+                    "zipcode": {
+                      "type": "number",
+                      "example": 94158
+                    },
+                    "ssn": {
+                      "type": "number",
+                      "example": "XXXXX6789"
+                    },
+                    "licenseNo": {
+                      "type": "string",
+                      "example": "FTEST1111 (CA)"
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "John.smith@checkr.com"
+                    },
+                    "package": {
+                      "type": "string",
+                      "example": "Employee pro"
+                    },
+                    "completedDate": {
+                      "type": "string",
+                      "format": "date",
+                      "example": "1990-09-01T09:12:28.000Z"
+                    },
+                    "turnAroundTime": {
+                      "type": "string",
+                      "example": "1 Day , 14 hours"
+                    },
+                    "courtSearches": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "example": "SSN Verification"
+                          },
+                          "status": {
+                            "type": "string",
+                            "example": "CLEAR"
+                          },
+                          "date": {
+                            "type": "string",
+                            "format": "date",
+                            "example": "2018-03-20T09:12:28.000Z"
+                          }
+                        }
+                      },
+                      "example": [
+                        {
+                          "name": "SSN Verification",
+                          "status": "CONSIDER",
+                          "date": "2018-03-20T09:12:28Z"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Data not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Candidate details not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/candidates/{candidateId}/action": {
+      "patch": {
+        "tags": [
+          "candidates"
+        ],
+        "summary": "Perform Adverse Action",
+        "description": "Perform a Action on the candidate.",
+        "operationId": "statusChange",
+        "parameters": [
+          {
+            "name": "candidateId",
+            "in": "path",
+            "description": "ID of the candidate",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "example": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of candidates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "John"
+                    },
+                    "preNotice": {
+                      "type": "string",
+                      "format": "date",
+                      "example": "2018-03-20T09:12:28.000Z"
+                    },
+                    "status": {
+                      "type": "string",
+                      "example": "CLEAR"
+                    },
+                    "postNotice": {
+                      "type": "string",
+                      "format": "date",
+                      "example": "2018-03-20T09:12:28.000Z"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Data not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid Candidate Id passed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation exception",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid data passed in the request"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/candidates/adverse-action": {
+      "get": {
+        "tags": [
+          "candidates"
+        ],
+        "operationId": "listOfAdverseActionCandidates",
+        "parameters": [
+          {
+            "name": "pageNo",
+            "in": "query",
+            "description": "Page number",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": 1
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Size of the page",
+            "required": false,
+            "schema": {
+              "type": "number",
+              "example": 10
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "search by candidate name",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "John"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter by status",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "CLEAR"
+            }
+          }
+        ],
+        "summary": "Returns a list of candidates with adverse action.",
+        "description": "List of the candidates in the system.",
+        "responses": {
+          "200": {
+            "description": "A JSON array of candidates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": 1
+                      },
+                      "candidateId": {
+                        "type": "string",
+                        "example": "John"
+                      },
+                      "status": {
+                        "type": "string",
+                        "example": "SCHEDULED"
+                      },
+                      "preNotice": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2018-03-20T09:12:28.000Z"
+                      },
+                      "postNotice": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "2018-03-20T09:12:28.000Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Adverse Action candidates not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  },
+                  "example": []
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sign-up": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Signup the user.",
+        "description": "Create the user in the system.",
+        "operationId": "singUpUser",
+        "requestBody": {
+          "description": "Creating user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "John.smith@checkr.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "ABC@123"
+                  },
+                  "confirmPassword": {
+                    "type": "string",
+                    "example": "ABC@123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "John.smith@checkr.com"
+                    },
+                    "userId": {
+                      "type": "number",
+                      "example": "1"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Exception",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Email / Password / Confirm Password Missing"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sign-in": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Login the user.",
+        "description": "Login the user into the system.",
+        "operationId": "signInUser",
+        "requestBody": {
+          "description": "Check for the user in the system",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "John.smith@checkr.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "ABC@123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Details of the user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "John.smith@checkr.com"
+                    },
+                    "userId": {
+                      "type": "number",
+                      "example": "1"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Validation exception",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized User. Please check Password / Email"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation exception",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Email / Password Missing"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/logout": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Logout the user.",
+        "description": "Logout the user.",
+        "operationId": "logout",
+        "responses": {
+          "200": {
+            "description": "Successfully Logged Out.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully Logged Out."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation exception",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid bearer token."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

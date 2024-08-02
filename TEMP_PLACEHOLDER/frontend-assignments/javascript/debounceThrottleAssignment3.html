@@ -1,0 +1,95 @@
+<!-- Assignment: Create a search bar that performs search requests with debouncing and throttling to improve user experience.
+(We don't need to concentrate on UI &Styling for this assignment) -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Bar with Debouncing and Throttling</title>
+</head>
+
+<body>
+    <div>
+        <div>
+            <input type="text" id="search-bar-debounce" placeholder="Search with debounce..." />
+            Results for Debounce Search
+            <div id="results-debounce"></div>
+        </div>
+        <div>
+            <input type="text" id="search-bar-throttle" placeholder="Search with throttle..." />
+            Results for Throttle Search
+            <div id="results-throttle"></div>
+        </div>
+    </div>
+
+
+    <script>
+
+        function debounce(func, delay) {
+            let timeoutId;
+            return function (...args) {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => {
+                    func.apply(this, args);
+                }, delay);
+            };
+        }
+
+        function throttle(func, limit) {
+            let lastFunc;
+            let lastRan;
+            return function (...args) {
+                if (!lastRan) {
+                    func.apply(this, args);
+                    lastRan = Date.now();
+                } else {
+                    clearTimeout(lastFunc);
+                    lastFunc = setTimeout(() => {
+                        if ((Date.now() - lastRan) >= limit) {
+                            func.apply(this, args);
+                            lastRan = Date.now();
+                        }
+                    }, limit - (Date.now() - lastRan));
+                }
+            };
+        }
+
+        function searchFun(query, type) {
+            console.log("Searching for:", query);
+            if (type == 'debounce') {
+                document.getElementById('results-debounce').innerHTML = query;
+            }
+            if (type == 'throttle') {
+                document.getElementById('results-throttle').innerHTML = query;
+            }
+
+        }
+
+        const searchDebounceInput = document.getElementById('search-bar-debounce');
+        const searchThrottleInput = document.getElementById('search-bar-throttle');
+
+        const debouncedSearch = debounce(searchFun, 300);
+        const throttledSearch = throttle(searchFun, 1000);
+
+        searchDebounceInput.addEventListener('input', (event) => {
+            const query = event.target.value;
+            if (query) {
+                debouncedSearch(query, 'debounce');
+            } else {
+                document.getElementById('results').innerHTML = '';
+            }
+        });
+        searchThrottleInput.addEventListener('input', (event) => {
+            const query = event.target.value;
+            if (query) {
+                throttledSearch(query, 'throttle');
+            } else {
+                document.getElementById('results').innerHTML = '';
+            }
+        });
+
+    </script>
+</body>
+
+</html>
